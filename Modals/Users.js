@@ -1,7 +1,7 @@
 const files = require('../utils/files');
 exports.usersModal = async () => {
 	const users = await files.get('users.json');
-	if (!users && !users.length) return;
+	if (!users || !users.length) return;
 
 	return {
 		type: 'modal',
