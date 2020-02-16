@@ -1,0 +1,16 @@
+{
+    "huset": {
+        "mandag": "Fiskeburger på grovbrød med råkost\nKalkungryte med bakte rotgrønnsaker og couscous\nPotet og purreløksuppe med tilbehør og brød\n",
+        "tirsdag": "Linsegryte Dal\nDampet torsk \nTilbehør:\nRis\nRaita\nLøksuppe med tilbehør og brød\n",
+        "onsdag": "Gresk sitronkylling med stekte poteter og tomatsalat\nBakt kveite med fløtesaus og byggrynrisotto\nFiskesuppe med tilbehør og brød\n",
+        "torsdag": "Lapskaus med flatbrød\nDagens fisk med tilbehør\nMinestronesuppe med tilbehør og brød\n",
+        "søndag": "Pigwings med spicy rub, kikertsalat og søtpotetpuré\nDagens suppe med tilbehør og brød\n"
+    },
+    "galleriet": {
+        "mandag": "Thai Panang curry med ris\nSuppe med kjøttbøller\n",
+        "tirsdag": "Spareribs med kål sala\nGrønnsaksuppe\n",
+        "onsdag": "Salmon Siciliano\nErtesuppe med svinekjøtt\n",
+        "torsdag": "Kylling og reker cajun pasta\nThaisuppe\n",
+        "søndag": "Marokansk Kyllinggryte med søtpoteter\nKremet skogsoppsuppe\n"
+    }
+}

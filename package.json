@@ -1,0 +1,19 @@
+{
+  "name": "kantinebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "startdev": "node -r dotenv/config app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/bolt": "^1.6.0",
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0",
+    "node-cron": "^2.0.3"
+  }
+}
