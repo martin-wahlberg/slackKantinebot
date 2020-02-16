@@ -41,6 +41,7 @@ exports.writeMenusFromJSONForm = formInput => {
 
 exports.checkIfUserExists = async userName => {
 	const users = await files.get('users.json');
+	console.log(userName);
 	return (
 		!!users.find(cur => cur.includes(userName)) ||
 		!!userName.includes(process.env.SUPER_ADMIN)
