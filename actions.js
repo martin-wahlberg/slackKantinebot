@@ -88,7 +88,7 @@ bolt.app.view('submit_menu', async ({ ack, view }) => {
 });
 
 cron.schedule(
-	'1-59 0-23 * * MON,TUE,WED,THU,FRI,SAT,SUN',
+	'30 10 * * MON,TUE,WED,THU,FRI',
 	() => {
 		DailyNotification.getDailyNotification().then(message => {
 			bolt.app.client.chat.postMessage({
