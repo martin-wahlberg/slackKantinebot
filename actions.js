@@ -57,10 +57,14 @@ const performKantinemenyAction = async (payload, context) => {
 			break;
 
 		case !!payload.text.toLowerCase().match(/getUsers/gi):
-			Users.usersModal().then(view => {
-				if (!view) return;
-				openModal(payload, context, view);
-			});
+			Users.usersModal()
+				.then(view => {
+					if (!view) return;
+					openModal(payload, context, view);
+				})
+				.catch(e => {
+					console.log(e);
+				});
 			break;
 
 		default:
