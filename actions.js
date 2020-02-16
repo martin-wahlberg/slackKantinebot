@@ -46,6 +46,7 @@ const performKantinemenyAction = async (payload, context) => {
 
 		case !!payload.text.toLowerCase().match(/analytics/gi):
 			Analytics.analyticsModal().then(view => {
+				if (!view) return;
 				openModal(payload, context, view);
 			});
 			break;
@@ -57,6 +58,7 @@ const performKantinemenyAction = async (payload, context) => {
 
 		case !!payload.text.toLowerCase().match(/getUsers/gi):
 			Users.usersModal().then(view => {
+				if (!view) return;
 				openModal(payload, context, view);
 			});
 			break;

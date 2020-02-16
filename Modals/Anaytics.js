@@ -1,7 +1,7 @@
 const files = require('../utils/files');
 exports.analyticsModal = async () => {
 	const logs = await files.get('log.json');
-
+	if (!logs && !Object.entries(logs).length) return;
 	return {
 		type: 'modal',
 		title: {
