@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var getUpdateMenuModal = function () {
-    var modal = {
+const getUpdateMenuModal = () => {
+    const modal = {
         type: 'modal',
         callback_id: 'submit_menu',
         title: {

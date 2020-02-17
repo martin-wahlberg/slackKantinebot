@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-import { getFile } from '../utils/files';
-import { getRandomFoodEmoji } from '../utils/utils';
+import { getFile } from '../Utils/files';
+import { getRandomFoodEmoji } from '../Utils';
 import { ChatPostMessageArguments } from '@slack/web-api';
 
 const getWeekDay = (dayNumber: number): string => {
@@ -27,10 +27,7 @@ const getWeekDay = (dayNumber: number): string => {
 	}
 };
 
-interface weekMenuLocations {
-	huset?: Record<string, string>;
-	galleriet?: Record<string, string>;
-}
+
 
 const getDailyNotification = async (): Promise<ChatPostMessageArguments> => {
 	const weeksMenu = await getFile<weekMenuLocations>('meny.json');

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { log } from './utils';
+import { log } from '.';
 
 export const getFile = <T>(fileName: string) => {
 	return new Promise<T | undefined>((resolve, reject) =>

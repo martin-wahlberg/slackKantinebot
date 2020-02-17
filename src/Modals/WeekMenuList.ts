@@ -1,6 +1,7 @@
-import { getFile } from '../utils/files';
-import { log, getRandomFoodEmoji } from '../utils/utils';
+import { getFile } from '../Utils/files';
+import { log, getRandomFoodEmoji } from '../Utils';
 import { View } from '@slack/web-api';
+
 
 const getWeekMenuText = (locationMenu?: Record<string, string>) =>
 	locationMenu &&
@@ -47,13 +48,10 @@ const getBlocksForLocation = (
 	}
 ];
 
-interface weekMenu {
-	huset?: Record<string, string>;
-	galleriet?: Record<string, string>;
-}
+
 
 const getWeekMenuList = async (selectedLocation: string) => {
-	const meny = await getFile<weekMenu>('meny.json');
+	const meny = await getFile<weekMenuLocations>('meny.json');
 	const huset = meny?.huset;
 	const galleriet = meny?.galleriet;
 	selectedLocation === 'huset'

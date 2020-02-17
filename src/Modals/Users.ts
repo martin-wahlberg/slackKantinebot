@@ -1,4 +1,4 @@
-import { getFile } from '../utils/files';
+import { getFile } from '../Utils/files';
 import { View } from '@slack/web-api';
 const usersModal = async () => {
 	const users = await getFile<string[]>('users.json');

@@ -1,4 +1,6 @@
 import { writeFile, getFile } from './files';
+import { View } from '@slack/web-api';
+import app from '../bolt';
 
 const foodEmojis = [
 	':pizza:',
@@ -26,25 +28,7 @@ const tryParseJSON = (jsonString: string) => {
 	}
 };
 
-interface valueString {
-	value: string;
-}
 
-interface HusetInputElement {
-	huset: valueString;
-}
-interface GallerietInputElement {
-	galleriet: valueString;
-}
-
-export interface JSONInputState {
-	values: Record<string, HusetInputElement | GallerietInputElement>;
-}
-
-interface mappedJSONInput {
-	huset?: valueString;
-	galleriet?: valueString;
-}
 
 export const writeMenusFromJSONForm = (formInput: Object) => {
 	const castedFormInput = formInput as JSONInputState;
@@ -121,4 +105,19 @@ export const log = async (key: string) => {
 
 export const resetLogs = () => {
 	writeFile('log.json', []);
+};
+
+
+export const openModal = (trigger_id: string, view: View) => {
+	try {
+		app.client.views.open({
+			token: process.env.SLACK_BOT_TOKEN,
+			// Pass a valid trigger_id within 3 seconds of receiving it
+			trigger_id: trigger_id,
+			// View payload
+			view
+		});
+	} catch (error) {
+		console.error(error);
+	}
 };
