@@ -1,9 +1,11 @@
-const files = require('../utils/files');
-exports.usersModal = async () => {
-	const users = await files.get('users.json');
-	if (!users || !users.length) return;
+import { getFile } from '../utils/files';
+import { View } from '@slack/web-api';
+const usersModal = async () => {
+	const users = await getFile<string[]>('users.json');
 
-	return {
+	if (!users?.length) return;
+
+	const modal: View = {
 		type: 'modal',
 		title: {
 			type: 'plain_text',
@@ -26,4 +28,6 @@ exports.usersModal = async () => {
 			}
 		]
 	};
+	return modal;
 };
+export default usersModal;

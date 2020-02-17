@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Launch Program",
 			"envFile": "${workspaceFolder}/.env",
-			"program": "${workspaceFolder}/app.js",
+			"program": "${workspaceFolder}/built/app.js",
 			"skipFiles": ["<node_internals>/**"]
 		}
 	]

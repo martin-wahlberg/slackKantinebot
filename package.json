@@ -2,18 +2,24 @@
   "name": "kantinebot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "start": "node app.js",
     "startdev": "node -r dotenv/config app.js",
+    "build": "tsc",
+    "watch": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@slack/bolt": "^1.6.0",
+    "@types/moment": "^2.13.0",
+    "@types/node-cron": "^2.0.3",
+    "awesome-typescript-loader": "^5.2.1",
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
-    "node-cron": "^2.0.3"
+    "node-cron": "^2.0.3",
+    "source-map-loader": "^0.2.4"
   }
 }

@@ -1,12 +1,12 @@
-var fs = require('fs');
-const utils = require('./utils');
+import fs from 'fs';
+import { log } from './utils';
 
-exports.get = fileName => {
-	return new Promise((resolve, reject) =>
-		fs.readFile(fileName, 'utf-8', (err, data) => {
+export const getFile = <T>(fileName: string) => {
+	return new Promise<T | undefined>((resolve, reject) =>
+		fs.readFile(fileName, 'utf-8', (err, data: string) => {
 			if (err) {
 				const errorMsg = `error_get_${fileName}`.replace('.', '_');
-				utils.log(errorMsg);
+				log(errorMsg);
 				reject(err);
 			} else {
 				try {
@@ -14,18 +14,18 @@ exports.get = fileName => {
 				} catch (error) {
 					resolve(undefined);
 					const errorMsg = `error_parse_${fileName}`.replace('.', '_');
-					utils.log(errorMsg);
+					log(errorMsg);
 				}
 			}
 		})
 	);
 };
 
-exports.write = (fileName, data) =>
+export const writeFile = (fileName: string, data: Object) =>
 	fs.writeFile(fileName, JSON.stringify(data), err => {
 		if (err) {
 			const errorMsg = `error_write_${fileName}`.replace('.', '_');
-			utils.log(errorMsg);
+			log(errorMsg);
 			throw err;
 		}
 	});

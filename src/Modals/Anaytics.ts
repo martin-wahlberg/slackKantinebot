@@ -1,9 +1,11 @@
-const files = require('../utils/files');
-exports.analyticsModal = async () => {
-	const logs = await files.get('log.json');
+import { getFile } from '../utils/files';
+import { View } from '@slack/web-api';
+
+const analyticsModal = async () => {
+	const logs = await getFile<[[string, string]]>('log.json');
 	if (!logs || !Object.entries(logs).length) return;
 
-	return {
+	const modal: View = {
 		type: 'modal',
 		title: {
 			type: 'plain_text',
@@ -26,4 +28,7 @@ exports.analyticsModal = async () => {
 			}
 		]
 	};
+	return modal;
 };
+
+export default analyticsModal;
