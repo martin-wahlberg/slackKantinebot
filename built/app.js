@@ -13,8 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const bolt_1 = __importDefault(require("./bolt"));
-require("./Actions");
-require("./CronJobs");
+const Actions_1 = __importDefault(require("./Actions"));
+const CronJobs_1 = __importDefault(require("./CronJobs"));
+Actions_1.default();
+CronJobs_1.default();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield bolt_1.default.start(process.env.PORT || 3000);
     console.log('⚡️ Bolt app is running!');

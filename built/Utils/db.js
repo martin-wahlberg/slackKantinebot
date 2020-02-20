@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const firebase_1 = require("../firebase");
-const kantineMenyRef = firebase_1.databaseRef.child('kantinemeny');
+const index_1 = require("../Utils/index");
 exports.getFromDb = (dbKey) => {
-    return new Promise(resolve => kantineMenyRef
+    return new Promise(resolve => firebase_1.databaseRef
         .child(dbKey)
         .once('value')
         .then(snapshot => {
@@ -14,10 +14,11 @@ exports.getFromDb = (dbKey) => {
         resolve(undefined);
     }));
 };
-exports.writeToDb = (dbKey, data) => kantineMenyRef
+exports.writeToDb = (dbKey, data) => firebase_1.databaseRef
     .child(dbKey)
     .set(data)
     .catch(err => {
+    index_1.log('writeFile');
     console.log('writeFile', err);
 });
 //# sourceMappingURL=db.js.map

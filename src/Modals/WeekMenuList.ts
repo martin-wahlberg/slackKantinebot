@@ -1,5 +1,5 @@
 import { getFromDb } from '../Utils/db';
-import { log, getRandomFoodEmoji, getWeekDayNumber } from '../Utils';
+import { getRandomFoodEmoji, getWeekDayNumber, log } from '../Utils';
 import { View } from '@slack/web-api';
 
 const getWeekMenuText = (locationMenu?: Record<string, string>) =>

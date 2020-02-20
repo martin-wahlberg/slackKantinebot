@@ -4,7 +4,8 @@ import {
   removeUser,
   addUser,
   openModal,
-  resetLogs
+  resetLogs,
+  log
 } from '../Utils';
 import { SlashCommand } from '@slack/bolt';
 import { checkIfSuperAdmin } from '../Utils';
@@ -16,27 +17,32 @@ import usersModal from '../Modals/Users';
 export const performKantinemenyAction = async (payload: SlashCommand) => {
   switch (true) {
     case !!payload.text.toLowerCase().match(/update/gi):
+      log('update_menu');
       console.log(payload.user_name);
       if (!(await checkIfUserExists(payload.user_name))) break;
       openModal(payload.trigger_id, getUpdateMenuModal());
       break;
 
     case !!payload.text.toLowerCase().match(/addUser/gi):
+      log('add_user');
       if (!(await checkIfUserExists(payload.user_name))) break;
       addUser(payload.text);
       break;
 
     case !!payload.text.toLowerCase().match(/removeUser/gi):
+      log('remove_user');
       if (!checkIfSuperAdmin(payload.user_name)) break;
       removeUser(payload.text);
       break;
 
     case !!payload.text.toLowerCase().match(/removeAllUsers/gi):
+      log('remove_all_users');
       if (!checkIfSuperAdmin(payload.user_name)) break;
       removeAllUsers();
       break;
 
     case !!payload.text.toLowerCase().match(/analytics/gi):
+      log('analytics');
       analyticsModal().then(view => {
         if (!view) return;
         openModal(payload.trigger_id, view);
@@ -44,11 +50,13 @@ export const performKantinemenyAction = async (payload: SlashCommand) => {
       break;
 
     case !!payload.text.toLowerCase().match(/resetLogs/gi):
+      log('reset_logs');
       if (!checkIfSuperAdmin(payload.user_name)) break;
       resetLogs();
       break;
 
     case !!payload.text.toLowerCase().match(/getUsers/gi):
+      log('get_users');
       usersModal().then(view => {
         if (!view) return;
         openModal(payload.trigger_id, view);
@@ -56,6 +64,7 @@ export const performKantinemenyAction = async (payload: SlashCommand) => {
       break;
 
     default:
+      log('slash_command_menu');
       getWeekMenuList(payload.text).then(view => {
         openModal(payload.trigger_id, view);
       });

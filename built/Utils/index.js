@@ -83,10 +83,21 @@ exports.removeUser = (userName) => __awaiter(void 0, void 0, void 0, function* (
 exports.removeAllUsers = () => {
     db_1.writeToDb('users', {});
 };
+let logging = false;
 exports.log = (key) => __awaiter(void 0, void 0, void 0, function* () {
-    const analytics = yield db_1.getFromDb('log');
-    const keyCount = analytics && analytics[key] ? analytics[key] + 1 : 1;
-    db_1.writeToDb('log', Object.assign(Object.assign({}, analytics), { [key]: keyCount }));
+    if (logging) {
+        setTimeout(() => {
+            exports.log(key);
+        }, 100);
+    }
+    else {
+        logging = true;
+        const analytics = yield db_1.getFromDb('log');
+        const keyCount = analytics && analytics[key] ? analytics[key] + 1 : 1;
+        db_1.writeToDb('log', Object.assign(Object.assign({}, analytics), { [key]: keyCount })).finally(() => {
+            logging = false;
+        });
+    }
 });
 exports.resetLogs = () => {
     db_1.writeToDb('log', {});

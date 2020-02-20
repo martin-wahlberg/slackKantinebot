@@ -20,5 +20,5 @@ admin.initializeApp({
 exports.databaseRef = admin
     .database()
     .ref()
-    .child(process.env.ENVIRONMENT || 'dev');
+    .child(`kantinemeny/${process.env.ENVIRONMENT || 'dev'}`);
 //# sourceMappingURL=firebase.js.map

@@ -16,22 +16,26 @@ const bolt_1 = __importDefault(require("../bolt"));
 const Utils_1 = require("../Utils");
 const WeekMenuList_1 = __importDefault(require("../Modals/WeekMenuList"));
 const KantineMenyCommand_1 = require("./KantineMenyCommand");
-console.log('👊 Actions loaded!');
-bolt_1.default.action('show_menu', ({ ack, body }) => {
-    ack();
-    WeekMenuList_1.default(' ').then(view => {
-        //body.trigger_id finnes på objektet men ikke i typen
-        //@ts-ignore
-        Utils_1.openModal(body.trigger_id, view);
+const actions = () => {
+    console.log('👊 Actions loaded!');
+    bolt_1.default.action('show_menu', ({ ack, body }) => {
+        ack();
+        WeekMenuList_1.default(' ').then(view => {
+            //body.trigger_id finnes på objektet men ikke i typen
+            //@ts-ignore
+            Utils_1.openModal(body.trigger_id, view);
+        });
+        Utils_1.log('show_menu_button');
     });
-    Utils_1.log('show_menu');
-});
-bolt_1.default.command('/kantinemeny', ({ ack, payload }) => {
-    ack();
-    KantineMenyCommand_1.performKantinemenyAction(payload);
-});
-bolt_1.default.view('submit_menu', ({ ack, view }) => __awaiter(void 0, void 0, void 0, function* () {
-    ack();
-    Utils_1.writeMenusFromJSONForm(view.state);
-}));
+    bolt_1.default.command('/kantinemeny', ({ ack, payload }) => {
+        ack();
+        KantineMenyCommand_1.performKantinemenyAction(payload);
+    });
+    bolt_1.default.view('submit_menu', ({ ack, view }) => __awaiter(void 0, void 0, void 0, function* () {
+        ack();
+        Utils_1.log('submit_menu');
+        Utils_1.writeMenusFromJSONForm(view.state);
+    }));
+};
+exports.default = actions;
 //# sourceMappingURL=index.js.map

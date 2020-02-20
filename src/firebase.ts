@@ -14,4 +14,4 @@ admin.initializeApp({
 export const databaseRef = admin
   .database()
   .ref()
-  .child(process.env.ENVIRONMENT || 'dev');
+  .child(`kantinemeny/${process.env.ENVIRONMENT || 'dev'}`);

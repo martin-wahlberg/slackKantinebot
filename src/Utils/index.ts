@@ -95,10 +95,20 @@ export const removeAllUsers = () => {
   writeToDb('users', {});
 };
 
+let logging = false;
 export const log = async (key: string) => {
-  const analytics = await getFromDb<{ [k: string]: number }>('log');
-  const keyCount = analytics && analytics[key] ? analytics[key] + 1 : 1;
-  writeToDb('log', { ...analytics, [key]: keyCount });
+  if (logging) {
+    setTimeout(() => {
+      log(key);
+    }, 100);
+  } else {
+    logging = true;
+    const analytics = await getFromDb<{ [k: string]: number }>('log');
+    const keyCount = analytics && analytics[key] ? analytics[key] + 1 : 1;
+    writeToDb('log', { ...analytics, [key]: keyCount }).finally(() => {
+      logging = false;
+    });
+  }
 };
 
 export const resetLogs = () => {
