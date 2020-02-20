@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const files_1 = require("./files");
+const db_1 = require("./db");
 const bolt_1 = __importDefault(require("../bolt"));
 const foodEmojis = [
     ':pizza:',
@@ -47,59 +47,62 @@ exports.writeMenusFromJSONForm = (formInput) => {
     const galleriet = (((_d = (_c = valuesFromForm) === null || _c === void 0 ? void 0 : _c.galleriet) === null || _d === void 0 ? void 0 : _d.value) &&
         tryParseJSON(valuesFromForm.galleriet.value.replace(/\n\\/g, ''))) ||
         {};
-    files_1.writeFile('meny.json', {
+    db_1.writeToDb('meny', {
         huset,
         galleriet
     });
 };
 exports.checkIfUserExists = (userName) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const users = yield files_1.getFile('users.json');
+    const users = yield db_1.getFromDb('users');
     return (!!((_a = users) === null || _a === void 0 ? void 0 : _a.find((cur) => cur.includes(userName))) ||
         (process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN)));
 });
 exports.checkIfSuperAdmin = (userName) => process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN);
 exports.addUser = (userName) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield files_1.getFile('users.json');
-    if (users) {
-        files_1.writeFile('users.json', [
-            ...users,
-            userName.replace(/addUser/gi, '').trim()
-        ]);
-    }
+    const users = yield db_1.getFromDb('users');
+    db_1.writeToDb('users', [
+        ...(users || []),
+        userName.replace(/addUser/gi, '').trim()
+    ]);
 });
 exports.removeUser = (userName) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield files_1.getFile('users.json');
-    if (users) {
-        files_1.writeFile('users.json', users.reduce((acc, cur) => {
-            if (!cur.includes(userName.replace(/removeUser/gi, '').trim()))
-                return [...acc, cur];
-            else
-                return acc;
-        }, []));
+    const formattedUserName = userName.replace(/removeUser/gi, '').trim();
+    if (formattedUserName) {
+        const users = yield db_1.getFromDb('users');
+        if (users) {
+            db_1.writeToDb('users', users.reduce((acc, cur) => {
+                if (!cur.includes(formattedUserName))
+                    return [...acc, cur];
+                else
+                    return acc;
+            }, []));
+        }
     }
 });
 exports.removeAllUsers = () => {
-    files_1.writeFile('users.json', []);
+    db_1.writeToDb('users', {});
 };
 exports.log = (key) => __awaiter(void 0, void 0, void 0, function* () {
-    const analytics = yield files_1.getFile('log.json');
-    if (analytics) {
-        const keyCount = analytics[key] + 1 || 1;
-        files_1.writeFile('log.json', Object.assign(Object.assign({}, analytics), { [key]: keyCount }));
-    }
+    const analytics = yield db_1.getFromDb('log');
+    const keyCount = analytics && analytics[key] ? analytics[key] + 1 : 1;
+    db_1.writeToDb('log', Object.assign(Object.assign({}, analytics), { [key]: keyCount }));
 });
 exports.resetLogs = () => {
-    files_1.writeFile('log.json', []);
+    db_1.writeToDb('log', {});
 };
 exports.openModal = (trigger_id, view) => {
     try {
-        bolt_1.default.client.views.open({
+        bolt_1.default.client.views
+            .open({
             token: process.env.SLACK_BOT_TOKEN,
             // Pass a valid trigger_id within 3 seconds of receiving it
             trigger_id: trigger_id,
             // View payload
             view
+        })
+            .catch(err => {
+            console.log(err);
         });
     }
     catch (error) {

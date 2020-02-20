@@ -17,12 +17,14 @@ const Utils_1 = require("../Utils");
 const WeekMenuList_1 = __importDefault(require("../Modals/WeekMenuList"));
 const KantineMenyCommand_1 = require("./KantineMenyCommand");
 console.log('👊 Actions loaded!');
-bolt_1.default.action('show_menu', ({ ack, context }) => {
+bolt_1.default.action('show_menu', ({ ack, body }) => {
     ack();
-    Utils_1.log('show_menu');
-    WeekMenuList_1.default('').then(view => {
-        Utils_1.openModal(context.trigger_id, view);
+    WeekMenuList_1.default(' ').then(view => {
+        //body.trigger_id finnes på objektet men ikke i typen
+        //@ts-ignore
+        Utils_1.openModal(body.trigger_id, view);
     });
+    Utils_1.log('show_menu');
 });
 bolt_1.default.command('/kantinemeny', ({ ack, payload }) => {
     ack();

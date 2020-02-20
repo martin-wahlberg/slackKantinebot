@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const files_1 = require("../Utils/files");
+const db_1 = require("../Utils/db");
 const analyticsModal = () => __awaiter(void 0, void 0, void 0, function* () {
-    const logs = yield files_1.getFile('log.json');
+    const logs = yield db_1.getFromDb('log');
     if (!logs || !Object.entries(logs).length)
         return;
     const modal = {

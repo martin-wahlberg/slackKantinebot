@@ -21,6 +21,7 @@ const Users_1 = __importDefault(require("../Modals/Users"));
 exports.performKantinemenyAction = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     switch (true) {
         case !!payload.text.toLowerCase().match(/update/gi):
+            console.log(payload.user_name);
             if (!(yield Utils_1.checkIfUserExists(payload.user_name)))
                 break;
             Utils_1.openModal(payload.trigger_id, UpdateMenu_1.default());

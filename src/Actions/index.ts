@@ -5,13 +5,14 @@ import { performKantinemenyAction } from './KantineMenyCommand';
 
 console.log('👊 Actions loaded!');
 
-app.action('show_menu', ({ ack, context }) => {
+app.action('show_menu', ({ ack, body }) => {
   ack();
-  log('show_menu');
-
-  getWeekMenuList('').then(view => {
-    openModal(context.trigger_id, view);
+  getWeekMenuList(' ').then(view => {
+    //body.trigger_id finnes på objektet men ikke i typen
+    //@ts-ignore
+    openModal(body.trigger_id, view);
   });
+  log('show_menu');
 });
 
 app.command('/kantinemeny', ({ ack, payload }) => {

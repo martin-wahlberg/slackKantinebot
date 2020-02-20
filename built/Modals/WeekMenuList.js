@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const files_1 = require("../Utils/files");
+const db_1 = require("../Utils/db");
 const Utils_1 = require("../Utils");
 const getWeekMenuText = (locationMenu) => locationMenu &&
     Object.entries(locationMenu).reduce((acc, cur) => {
@@ -52,7 +52,7 @@ const getBlocksForLocation = (locationName, locationMenu) => [
 ];
 const getWeekMenuList = (selectedLocation) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
-    const meny = yield files_1.getFile('meny.json');
+    const meny = yield db_1.getFromDb('meny');
     const huset = (_a = meny) === null || _a === void 0 ? void 0 : _a.huset;
     const galleriet = (_b = meny) === null || _b === void 0 ? void 0 : _b.galleriet;
     selectedLocation === 'huset'

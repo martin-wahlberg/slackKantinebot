@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const moment_1 = __importDefault(require("moment"));
-const files_1 = require("../Utils/files");
+const db_1 = require("../Utils/db");
 const Utils_1 = require("../Utils");
 const getWeekDay = (dayNumber) => {
     switch (dayNumber) {
@@ -39,7 +39,7 @@ const getWeekDay = (dayNumber) => {
 };
 const getDailyNotification = () => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
-    const weeksMenu = yield files_1.getFile('meny.json');
+    const weeksMenu = yield db_1.getFromDb('meny');
     const huset = (_b = (_a = weeksMenu) === null || _a === void 0 ? void 0 : _a.huset) === null || _b === void 0 ? void 0 : _b[getWeekDay(moment_1.default().weekday())];
     const galleriet = (_d = (_c = weeksMenu) === null || _c === void 0 ? void 0 : _c.galleriet) === null || _d === void 0 ? void 0 : _d[getWeekDay(moment_1.default().weekday())];
     return {
