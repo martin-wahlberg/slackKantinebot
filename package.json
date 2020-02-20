@@ -13,12 +13,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@slack/bolt": "1.6.0",
     "@types/moment": "2.13.0",
     "@types/node-cron": "2.0.3"
   },
   "dependencies": {
-    "awesome-typescript-loader": "^5.2.1",
+    "@slack/bolt": "1.6.0",
     "dotenv": "8.2.0",
     "firebase-admin": "8.9.2",
     "moment": "2.24.0",
