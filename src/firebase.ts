@@ -11,4 +11,7 @@ admin.initializeApp({
   databaseURL: 'https://slackbots-84cf4.firebaseio.com'
 });
 
-export const databaseRef = admin.database().ref();
+export const databaseRef = admin
+  .database()
+  .ref()
+  .child(process.env.ENVIRONMENT || 'dev');

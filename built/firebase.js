@@ -17,5 +17,8 @@ admin.initializeApp({
     }),
     databaseURL: 'https://slackbots-84cf4.firebaseio.com'
 });
-exports.databaseRef = admin.database().ref();
+exports.databaseRef = admin
+    .database()
+    .ref()
+    .child(process.env.ENVIRONMENT || 'dev');
 //# sourceMappingURL=firebase.js.map
