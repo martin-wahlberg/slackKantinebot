@@ -53,17 +53,18 @@ exports.writeMenusFromJSONForm = (formInput) => {
     });
 };
 exports.checkIfUserExists = (userName) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     const users = yield db_1.getFromDb('users');
-    return (!!((_a = users) === null || _a === void 0 ? void 0 : _a.find((cur) => cur.includes(userName))) ||
+    return ((!!((_a = users) === null || _a === void 0 ? void 0 : _a.length) &&
+        !!((_b = users) === null || _b === void 0 ? void 0 : _b.find(cur => cur.userName.includes(userName)))) ||
         (process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN)));
 });
 exports.checkIfSuperAdmin = (userName) => process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN);
-exports.addUser = (userName) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addUser = (addedBy, userName) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield db_1.getFromDb('users');
     db_1.writeToDb('users', [
         ...(users || []),
-        userName.replace(/addUser/gi, '').trim()
+        { userName: userName.replace(/addUser/gi, '').trim(), addedBy }
     ]);
 });
 exports.removeUser = (userName) => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,7 +73,7 @@ exports.removeUser = (userName) => __awaiter(void 0, void 0, void 0, function* (
         const users = yield db_1.getFromDb('users');
         if (users) {
             db_1.writeToDb('users', users.reduce((acc, cur) => {
-                if (!cur.includes(formattedUserName))
+                if (!cur.userName.includes(formattedUserName))
                     return [...acc, cur];
                 else
                     return acc;

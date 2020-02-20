@@ -31,7 +31,7 @@ exports.performKantinemenyAction = (payload) => __awaiter(void 0, void 0, void 0
             Utils_1.log('add_user');
             if (!(yield Utils_1.checkIfUserExists(payload.user_name)))
                 break;
-            Utils_1.addUser(payload.text);
+            Utils_1.addUser(payload.user_name, payload.text);
             break;
         case !!payload.text.toLowerCase().match(/removeUser/gi):
             Utils_1.log('remove_user');
@@ -60,6 +60,8 @@ exports.performKantinemenyAction = (payload) => __awaiter(void 0, void 0, void 0
             Utils_1.resetLogs();
             break;
         case !!payload.text.toLowerCase().match(/getUsers/gi):
+            if (!Utils_2.checkIfSuperAdmin(payload.user_name))
+                break;
             Utils_1.log('get_users');
             Users_1.default().then(view => {
                 if (!view)

@@ -57,9 +57,10 @@ export const writeMenusFromJSONForm = (formInput: Object) => {
 };
 
 export const checkIfUserExists = async (userName: string) => {
-  const users = await getFromDb<string[]>('users');
+  const users = await getFromDb<User[]>('users');
   return (
-    !!users?.find((cur: string) => cur.includes(userName)) ||
+    (!!users?.length &&
+      !!users?.find(cur => cur.userName.includes(userName))) ||
     (process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN))
   );
 };
@@ -67,23 +68,23 @@ export const checkIfUserExists = async (userName: string) => {
 export const checkIfSuperAdmin = (userName: string) =>
   process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN);
 
-export const addUser = async (userName: string) => {
-  const users = await getFromDb<string[]>('users');
+export const addUser = async (addedBy: string, userName: string) => {
+  const users = await getFromDb<User[]>('users');
   writeToDb('users', [
     ...(users || []),
-    userName.replace(/addUser/gi, '').trim()
+    { userName: userName.replace(/addUser/gi, '').trim(), addedBy }
   ]);
 };
 
 export const removeUser = async (userName: string) => {
   const formattedUserName = userName.replace(/removeUser/gi, '').trim();
   if (formattedUserName) {
-    const users = await getFromDb<string[]>('users');
+    const users = await getFromDb<User[]>('users');
     if (users) {
       writeToDb(
         'users',
-        users.reduce((acc: string[], cur: string) => {
-          if (!cur.includes(formattedUserName)) return [...acc, cur];
+        users.reduce((acc: User[], cur) => {
+          if (!cur.userName.includes(formattedUserName)) return [...acc, cur];
           else return acc;
         }, [])
       );

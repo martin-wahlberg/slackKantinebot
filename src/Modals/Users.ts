@@ -1,7 +1,7 @@
 import { getFromDb } from '../Utils/db';
 import { View } from '@slack/web-api';
 const usersModal = async () => {
-  const users = await getFromDb<string[]>('users');
+  const users = await getFromDb<User[]>('users');
 
   if (!users?.length) return;
 
@@ -21,9 +21,11 @@ const usersModal = async () => {
     blocks: [
       {
         type: 'section',
-        fields: users.map(cur => ({
+        fields: users.map((cur, index) => ({
           type: 'mrkdwn',
-          text: `*Username:*\n\`\`\`${cur}\`\`\``
+          text: `*User ${index + 1}:*\n\`\`\`Username: ${
+            cur.userName
+          }\nAdded by: ${cur.addedBy}\`\`\``
         }))
       }
     ]

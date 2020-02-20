@@ -30,9 +30,9 @@ const usersModal = () => __awaiter(void 0, void 0, void 0, function* () {
         blocks: [
             {
                 type: 'section',
-                fields: users.map(cur => ({
+                fields: users.map((cur, index) => ({
                     type: 'mrkdwn',
-                    text: `*Username:*\n\`\`\`${cur}\`\`\``
+                    text: `*User ${index + 1}:*\n\`\`\`Username: ${cur.userName}\nAdded by: ${cur.addedBy}\`\`\``
                 }))
             }
         ]

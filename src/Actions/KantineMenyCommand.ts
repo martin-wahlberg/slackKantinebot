@@ -26,7 +26,7 @@ export const performKantinemenyAction = async (payload: SlashCommand) => {
     case !!payload.text.toLowerCase().match(/addUser/gi):
       log('add_user');
       if (!(await checkIfUserExists(payload.user_name))) break;
-      addUser(payload.text);
+      addUser(payload.user_name, payload.text);
       break;
 
     case !!payload.text.toLowerCase().match(/removeUser/gi):
@@ -56,6 +56,7 @@ export const performKantinemenyAction = async (payload: SlashCommand) => {
       break;
 
     case !!payload.text.toLowerCase().match(/getUsers/gi):
+      if (!checkIfSuperAdmin(payload.user_name)) break;
       log('get_users');
       usersModal().then(view => {
         if (!view) return;

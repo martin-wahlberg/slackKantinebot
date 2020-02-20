@@ -23,3 +23,8 @@ interface mappedJSONInput {
 interface JSONInputState {
   values: Record<string, HusetInputElement | GallerietInputElement>;
 }
+
+interface User {
+  addedBy: string;
+  userName: string;
+}
