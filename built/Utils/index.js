@@ -109,4 +109,46 @@ exports.openModal = (trigger_id, view) => {
         console.error(error);
     }
 };
+exports.getWeekDay = (dayNumber) => {
+    switch (dayNumber) {
+        case 0:
+            return 'søndag';
+        case 1:
+            return 'mandag';
+        case 2:
+            return 'tirsdag';
+        case 3:
+            return 'onsdag';
+        case 4:
+            return 'torsdag';
+        case 5:
+            return 'fredag';
+        case 6:
+            return 'lørdag';
+        case 7:
+            return 'søndag';
+        default:
+            return 'ikkeEnDag';
+    }
+};
+exports.getWeekDayNumber = (day) => {
+    switch (day) {
+        case 'mandag':
+            return 1;
+        case 'tirsdag':
+            return 2;
+        case 'onsdag':
+            return 3;
+        case 'torsdag':
+            return 4;
+        case 'fredag':
+            return 5;
+        case 'lørdag':
+            return 6;
+        case 'søndag':
+            return 7;
+        default:
+            return 8;
+    }
+};
 //# sourceMappingURL=index.js.map

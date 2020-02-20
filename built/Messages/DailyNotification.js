@@ -15,33 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const moment_1 = __importDefault(require("moment"));
 const db_1 = require("../Utils/db");
 const Utils_1 = require("../Utils");
-const getWeekDay = (dayNumber) => {
-    switch (dayNumber) {
-        case 0:
-            return 'søndag';
-        case 1:
-            return 'mandag';
-        case 2:
-            return 'tirsdag';
-        case 3:
-            return 'onsdag';
-        case 4:
-            return 'torsdag';
-        case 5:
-            return 'fredag';
-        case 6:
-            return 'lørdag';
-        case 7:
-            return 'søndag';
-        default:
-            return 'ikkeEnDag';
-    }
-};
 const getDailyNotification = () => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
     const weeksMenu = yield db_1.getFromDb('meny');
-    const huset = (_b = (_a = weeksMenu) === null || _a === void 0 ? void 0 : _a.huset) === null || _b === void 0 ? void 0 : _b[getWeekDay(moment_1.default().weekday())];
-    const galleriet = (_d = (_c = weeksMenu) === null || _c === void 0 ? void 0 : _c.galleriet) === null || _d === void 0 ? void 0 : _d[getWeekDay(moment_1.default().weekday())];
+    const huset = (_b = (_a = weeksMenu) === null || _a === void 0 ? void 0 : _a.huset) === null || _b === void 0 ? void 0 : _b[Utils_1.getWeekDay(moment_1.default().weekday())];
+    const galleriet = (_d = (_c = weeksMenu) === null || _c === void 0 ? void 0 : _c.galleriet) === null || _d === void 0 ? void 0 : _d[Utils_1.getWeekDay(moment_1.default().weekday())];
     return {
         token: process.env.SLACK_BOT_TOKEN,
         channel: process.env.KANTINEMENY_CHANNEL_ID || '',

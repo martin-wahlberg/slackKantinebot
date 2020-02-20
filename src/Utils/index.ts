@@ -122,3 +122,47 @@ export const openModal = (trigger_id: string, view: View) => {
     console.error(error);
   }
 };
+
+export const getWeekDay = (dayNumber: number): string => {
+  switch (dayNumber) {
+    case 0:
+      return 'søndag';
+    case 1:
+      return 'mandag';
+    case 2:
+      return 'tirsdag';
+    case 3:
+      return 'onsdag';
+    case 4:
+      return 'torsdag';
+    case 5:
+      return 'fredag';
+    case 6:
+      return 'lørdag';
+    case 7:
+      return 'søndag';
+    default:
+      return 'ikkeEnDag';
+  }
+};
+
+export const getWeekDayNumber = (day: string): number => {
+  switch (day) {
+    case 'mandag':
+      return 1;
+    case 'tirsdag':
+      return 2;
+    case 'onsdag':
+      return 3;
+    case 'torsdag':
+      return 4;
+    case 'fredag':
+      return 5;
+    case 'lørdag':
+      return 6;
+    case 'søndag':
+      return 7;
+    default:
+      return 8;
+  }
+};

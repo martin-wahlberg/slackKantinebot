@@ -1,19 +1,21 @@
 import { getFromDb } from '../Utils/db';
-import { log, getRandomFoodEmoji } from '../Utils';
+import { log, getRandomFoodEmoji, getWeekDayNumber } from '../Utils';
 import { View } from '@slack/web-api';
 
 const getWeekMenuText = (locationMenu?: Record<string, string>) =>
   locationMenu &&
-  Object.entries(locationMenu).reduce((acc, cur) => {
-    const [key, value] = cur;
-    return `${acc}\n\n*${key.charAt(0).toUpperCase() +
-      key.substring(1)}*\n>${value
-      .replace(/\n/g, ', ')
-      .replace(/ ,/g, ',')
-      .replace(/:,/g, ':')
-      .trim()
-      .replace(/,$/, '')}`;
-  }, '');
+  Object.entries(locationMenu)
+    .sort((a, b) => getWeekDayNumber(a[0]) - getWeekDayNumber(b[0]))
+    .reduce((acc, cur) => {
+      const [key, value] = cur;
+      return `${acc}\n\n*${key.charAt(0).toUpperCase() +
+        key.substring(1)}*\n>${value
+        .replace(/\n/g, ', ')
+        .replace(/ ,/g, ',')
+        .replace(/:,/g, ':')
+        .trim()
+        .replace(/,$/, '')}`;
+    }, '');
 
 const getBlocksForLocation = (
   locationName: string,

@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../Utils/db");
 const Utils_1 = require("../Utils");
 const getWeekMenuText = (locationMenu) => locationMenu &&
-    Object.entries(locationMenu).reduce((acc, cur) => {
+    Object.entries(locationMenu)
+        .sort((a, b) => Utils_1.getWeekDayNumber(a[0]) - Utils_1.getWeekDayNumber(b[0]))
+        .reduce((acc, cur) => {
         const [key, value] = cur;
         return `${acc}\n\n*${key.charAt(0).toUpperCase() +
             key.substring(1)}*\n>${value
