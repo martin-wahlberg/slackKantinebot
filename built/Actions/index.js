@@ -23,7 +23,8 @@ const actions = () => {
         WeekMenuList_1.default(' ').then(view => {
             //body.trigger_id finnes på objektet men ikke i typen
             //@ts-ignore
-            Utils_1.openModal(body.trigger_id, view);
+            const { trigger_id } = body;
+            Utils_1.openModal(trigger_id, view);
         });
         Utils_1.log('show_menu_button');
     });

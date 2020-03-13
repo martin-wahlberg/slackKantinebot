@@ -10,9 +10,11 @@ const cronJobs = () => {
     '30 10 * * MON,TUE,WED,THU,FRI',
     () => {
       getDailyNotification().then(message => {
-        app.client.chat.postMessage({
-          ...message
-        });
+        if (message) {
+          app.client.chat.postMessage({
+            ...message
+          });
+        }
       });
     },
     {

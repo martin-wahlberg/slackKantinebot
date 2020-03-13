@@ -14,4 +14,4 @@ admin.initializeApp({
 export const databaseRef = admin
   .database()
   .ref()
-  .child(`kantinemeny/${process.env.ENVIRONMENT || 'dev'}`);
+  .child(`kantinebot/${process.env.ENVIRONMENT || 'dev'}`);

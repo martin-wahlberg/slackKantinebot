@@ -53,10 +53,9 @@ const getBlocksForLocation = (locationName, locationMenu) => [
     }
 ];
 const getWeekMenuList = (selectedLocation) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
     const meny = yield db_1.getFromDb('meny');
-    const huset = (_a = meny) === null || _a === void 0 ? void 0 : _a.huset;
-    const galleriet = (_b = meny) === null || _b === void 0 ? void 0 : _b.galleriet;
+    const huset = meny === null || meny === void 0 ? void 0 : meny.huset;
+    const galleriet = meny === null || meny === void 0 ? void 0 : meny.galleriet;
     selectedLocation === 'huset'
         ? Utils_1.log('kantinemeny_huset')
         : selectedLocation === 'galleriet'

@@ -4,8 +4,10 @@ import { getFromDb } from '../Utils/db';
 import { getRandomFoodEmoji, getWeekDay } from '../Utils';
 import { ChatPostMessageArguments } from '@slack/web-api';
 
-const getDailyNotification = async (): Promise<ChatPostMessageArguments> => {
+const getDailyNotification = async (): Promise<ChatPostMessageArguments | null> => {
   const weeksMenu = await getFromDb<weekMenuLocations>('meny');
+
+  if (weeksMenu?.disabled) return null;
 
   const huset = weeksMenu?.huset?.[getWeekDay(moment().weekday())];
   const galleriet = weeksMenu?.galleriet?.[getWeekDay(moment().weekday())];

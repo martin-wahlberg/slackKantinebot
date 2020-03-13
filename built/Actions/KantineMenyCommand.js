@@ -18,6 +18,8 @@ const WeekMenuList_1 = __importDefault(require("../Modals/WeekMenuList"));
 const UpdateMenu_1 = __importDefault(require("../Modals/UpdateMenu"));
 const Anaytics_1 = __importDefault(require("../Modals/Anaytics"));
 const Users_1 = __importDefault(require("../Modals/Users"));
+const db_1 = require("../Utils/db");
+const db_2 = require("../Utils/db");
 exports.performKantinemenyAction = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     switch (true) {
         case !!payload.text.toLowerCase().match(/update/gi):
@@ -26,6 +28,10 @@ exports.performKantinemenyAction = (payload) => __awaiter(void 0, void 0, void 0
             if (!(yield Utils_1.checkIfUserExists(payload.user_name)))
                 break;
             Utils_1.openModal(payload.trigger_id, UpdateMenu_1.default());
+            break;
+        case !!payload.text.toLowerCase().match(/toggleBot/gi):
+            Utils_1.log('toggleBot');
+            db_1.getFromDb('meny/disabled').then(res => db_2.writeToDb('meny/disabled', !res));
             break;
         case !!payload.text.toLowerCase().match(/addUser/gi):
             Utils_1.log('add_user');

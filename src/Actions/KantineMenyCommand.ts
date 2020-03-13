@@ -13,6 +13,8 @@ import getWeekMenuList from '../Modals/WeekMenuList';
 import getUpdateMenuModal from '../Modals/UpdateMenu';
 import analyticsModal from '../Modals/Anaytics';
 import usersModal from '../Modals/Users';
+import { getFromDb } from '../Utils/db';
+import { writeToDb } from '../Utils/db';
 
 export const performKantinemenyAction = async (payload: SlashCommand) => {
   switch (true) {
@@ -21,6 +23,13 @@ export const performKantinemenyAction = async (payload: SlashCommand) => {
       console.log(payload.user_name);
       if (!(await checkIfUserExists(payload.user_name))) break;
       openModal(payload.trigger_id, getUpdateMenuModal());
+      break;
+
+    case !!payload.text.toLowerCase().match(/toggleBot/gi):
+      log('toggleBot');
+      getFromDb<boolean>('meny/disabled').then(res =>
+        writeToDb('meny/disabled', !res)
+      );
       break;
 
     case !!payload.text.toLowerCase().match(/addUser/gi):

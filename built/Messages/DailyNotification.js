@@ -16,10 +16,12 @@ const moment_1 = __importDefault(require("moment"));
 const db_1 = require("../Utils/db");
 const Utils_1 = require("../Utils");
 const getDailyNotification = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d;
+    var _a, _b;
     const weeksMenu = yield db_1.getFromDb('meny');
-    const huset = (_b = (_a = weeksMenu) === null || _a === void 0 ? void 0 : _a.huset) === null || _b === void 0 ? void 0 : _b[Utils_1.getWeekDay(moment_1.default().weekday())];
-    const galleriet = (_d = (_c = weeksMenu) === null || _c === void 0 ? void 0 : _c.galleriet) === null || _d === void 0 ? void 0 : _d[Utils_1.getWeekDay(moment_1.default().weekday())];
+    if (weeksMenu === null || weeksMenu === void 0 ? void 0 : weeksMenu.disabled)
+        return null;
+    const huset = (_a = weeksMenu === null || weeksMenu === void 0 ? void 0 : weeksMenu.huset) === null || _a === void 0 ? void 0 : _a[Utils_1.getWeekDay(moment_1.default().weekday())];
+    const galleriet = (_b = weeksMenu === null || weeksMenu === void 0 ? void 0 : weeksMenu.galleriet) === null || _b === void 0 ? void 0 : _b[Utils_1.getWeekDay(moment_1.default().weekday())];
     return {
         token: process.env.SLACK_BOT_TOKEN,
         channel: process.env.KANTINEMENY_CHANNEL_ID || '',

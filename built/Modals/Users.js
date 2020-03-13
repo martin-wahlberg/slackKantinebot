@@ -11,9 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../Utils/db");
 const usersModal = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     const users = yield db_1.getFromDb('users');
-    if (!((_a = users) === null || _a === void 0 ? void 0 : _a.length))
+    if (!(users === null || users === void 0 ? void 0 : users.length))
         return;
     const modal = {
         type: 'modal',

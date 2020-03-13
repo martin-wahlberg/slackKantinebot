@@ -1,4 +1,5 @@
 interface weekMenuLocations {
+  disabled: boolean;
   huset?: Record<string, string>;
   galleriet?: Record<string, string>;
 }

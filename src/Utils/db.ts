@@ -10,7 +10,8 @@ export const getFromDb = <T>(dbKey: string) => {
         resolve(snapshot.val());
       })
       .catch(err => {
-        console.log('getFile', err);
+        log('getFromDb_error');
+        console.log('getFromDb', err);
         resolve(undefined);
       })
   );
@@ -21,6 +22,6 @@ export const writeToDb = (dbKey: string, data: Object) =>
     .child(dbKey)
     .set(data)
     .catch(err => {
-      log('writeFile');
-      console.log('writeFile', err);
+      log('writeToDb_error');
+      console.log('writeToDb', err);
     });

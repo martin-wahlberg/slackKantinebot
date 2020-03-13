@@ -11,7 +11,9 @@ const actions = () => {
     getWeekMenuList(' ').then(view => {
       //body.trigger_id finnes på objektet men ikke i typen
       //@ts-ignore
-      openModal(body.trigger_id, view);
+      const { trigger_id } = body;
+
+      openModal(trigger_id, view);
     });
     log('show_menu_button');
   });

@@ -11,7 +11,9 @@ const cronJobs = () => {
     //Daily lunch notification
     node_cron_1.default.schedule('30 10 * * MON,TUE,WED,THU,FRI', () => {
         DailyNotification_1.default().then(message => {
-            bolt_1.default.client.chat.postMessage(Object.assign({}, message));
+            if (message) {
+                bolt_1.default.client.chat.postMessage(Object.assign({}, message));
+            }
         });
     }, {
         scheduled: true,

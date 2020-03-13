@@ -38,13 +38,13 @@ const tryParseJSON = (jsonString) => {
     }
 };
 exports.writeMenusFromJSONForm = (formInput) => {
-    var _a, _b, _c, _d;
+    var _a, _b;
     const castedFormInput = formInput;
     const valuesFromForm = Object.values(castedFormInput.values).reduce((acc, cur) => (Object.assign(Object.assign({}, acc), cur)), {});
-    const huset = (((_b = (_a = valuesFromForm) === null || _a === void 0 ? void 0 : _a.huset) === null || _b === void 0 ? void 0 : _b.value) &&
+    const huset = (((_a = valuesFromForm === null || valuesFromForm === void 0 ? void 0 : valuesFromForm.huset) === null || _a === void 0 ? void 0 : _a.value) &&
         tryParseJSON(valuesFromForm.huset.value.replace(/\n\\/g, ''))) ||
         {};
-    const galleriet = (((_d = (_c = valuesFromForm) === null || _c === void 0 ? void 0 : _c.galleriet) === null || _d === void 0 ? void 0 : _d.value) &&
+    const galleriet = (((_b = valuesFromForm === null || valuesFromForm === void 0 ? void 0 : valuesFromForm.galleriet) === null || _b === void 0 ? void 0 : _b.value) &&
         tryParseJSON(valuesFromForm.galleriet.value.replace(/\n\\/g, ''))) ||
         {};
     db_1.writeToDb('meny', {
@@ -53,10 +53,9 @@ exports.writeMenusFromJSONForm = (formInput) => {
     });
 };
 exports.checkIfUserExists = (userName) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
     const users = yield db_1.getFromDb('users');
-    return ((!!((_a = users) === null || _a === void 0 ? void 0 : _a.length) &&
-        !!((_b = users) === null || _b === void 0 ? void 0 : _b.find(cur => cur.userName.includes(userName)))) ||
+    return ((!!(users === null || users === void 0 ? void 0 : users.length) &&
+        !!(users === null || users === void 0 ? void 0 : users.find(cur => cur.userName.includes(userName)))) ||
         (process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN)));
 });
 exports.checkIfSuperAdmin = (userName) => process.env.SUPER_ADMIN && !!userName.includes(process.env.SUPER_ADMIN);
