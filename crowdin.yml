@@ -1,0 +1,3 @@
+files:
+  - source: /src/Messages/
+    translation: /src/Messages/%two_letters_code%/%original_file_name%
