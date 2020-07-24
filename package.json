@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node ./built/app.js",
     "startdev": "node -r dotenv/config app.js",
@@ -14,7 +17,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/moment": "2.13.0",
-    "@types/node-cron": "2.0.3"
+    "@types/node-cron": "2.0.3",
+    "typescript": "3.9.7"
   },
   "dependencies": {
     "@slack/bolt": "1.6.0",
