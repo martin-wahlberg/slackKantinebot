@@ -6,9 +6,9 @@ import { performKantinemenyAction } from './KantineMenyCommand';
 const actions = () => {
   console.log('👊 Actions loaded!');
 
-  app.action('show_menu', ({ ack, body }) => {
+  app.action('show_menu', async ({ ack, body }) => {
     ack();
-    getWeekMenuList(' ').then(view => {
+    getWeekMenuList(' ').then((view) => {
       //body.trigger_id finnes på objektet men ikke i typen
       //@ts-ignore
       const { trigger_id } = body;
@@ -18,7 +18,7 @@ const actions = () => {
     log('show_menu_button');
   });
 
-  app.command('/kantinemeny', ({ ack, payload }) => {
+  app.command('/kantinemeny', async ({ ack, payload }) => {
     ack();
     performKantinemenyAction(payload);
   });
